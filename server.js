@@ -3,11 +3,16 @@ const express = require('express');
 const path = require('path')
 const db = require('./db');
 const cors = require('cors');
+const socket = require('socket.io');
 
 const app = express();
 app.use(cors());
 
-// import routes
+app.use((req, res, next) => {
+  req.io = io;
+  next();
+});
+
 const testimonialsRoutes = require('./routes/testimonials.routes');
 const concertsRoutes = require('./routes/concerts.routes');
 const seatsRoutes = require('./routes/seats.routes');
@@ -29,6 +34,12 @@ app.use((req, res) => {
     res.status(404).send( { message: '404 not found...'});
   })
 
-  app.listen(process.env.PORT || 8000, () => {
+  const server = app.listen(process.env.PORT || 8000, () => {
     console.log('Server is running on port: 8000');
   }); 
+
+  const io = socket(server);
+
+io.on('connection', (socket) => {
+  console.log('New socket!');
+});

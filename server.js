@@ -17,6 +17,7 @@ const testimonialsRoutes = require('./routes/testimonials.routes');
 const concertsRoutes = require('./routes/concerts.routes');
 const seatsRoutes = require('./routes/seats.routes');
 
+
 app.use(express.static(path.join(__dirname, '/client/build')));
 
 app.use(express.urlencoded( {extended: true} ));
@@ -24,7 +25,7 @@ app.use(express.json());
 
 app.use('/api', testimonialsRoutes);
 app.use('/api', concertsRoutes);
-app.use('api/', seatsRoutes);
+app.use('/api', seatsRoutes);
 
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '/client/build/index.html'));
@@ -34,7 +35,7 @@ app.use((req, res) => {
     res.status(404).send( { message: '404 not found...'});
   })
 
-  mongoose.connect('mongodb://localhost:27017/NewWaveDB', { useNewUrlParser: true });
+  mongoose.connect('mongodb+srv://KamilaKR:<password>@cluster0.9a1ke.mongodb.net/myFirstDatabase?retryWrites=true&w=majority', { useNewUrlParser: true });
   const db = mongoose.connection;
 
   db.once('open', () => {

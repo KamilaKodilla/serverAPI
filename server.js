@@ -5,8 +5,12 @@ const socket = require('socket.io');
 
 const mongoose = require('mongoose');
 
+const helmet = require('helmet');
+
 const app = express();
 app.use(cors());
+
+app.use(helmet());
 
 app.use((req, res, next) => {
   req.io = io;
@@ -40,7 +44,7 @@ app.use((req, res) => {
 const NODE_ENV = process.env.NODE_ENV;
 let dbUri = '';
 
-if(NODE_ENV === 'production') dbUri = 'mongodb+srv://KamilaKR:<password>@cluster0.9a1ke.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
+if(NODE_ENV === 'production') dbUri = 'mongodb+srv://${process.env.login}:${process.env.password}@cluster0.9a1ke.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
 else if(NODE_ENV === 'test') dbUri = 'mongodb://localhost:27017/NewWaveDBtest';
 else dbUri = 'mongodb://localhost:27017/NewWaveDB';
 

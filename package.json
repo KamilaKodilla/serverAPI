@@ -29,11 +29,11 @@
     "mongo-sanitize": "1.0.1",
     "mongodb": "3.3.2",
     "mongoose": "5.7.1",
-    "nodemon": "^2.0.13",
+    "nodemon": "^3.0.0",
     "onchange": "6.1.0",
     "path": "^0.12.7",
     "snyk": "1.235.0",
-    "socket.io": "^4.4.0",
+    "socket.io": "^4.5.0",
     "uuid": "^8.3.2"
   }
 }
